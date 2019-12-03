@@ -21,3 +21,33 @@ Eclipse IDE for Java
 Pg Admin
 
 	https://www.pgadmin.org/download/
+
+## Use REST to get information and post diagram or start diagram using Postman.
+
+### Post a diagram into Camunda
+
+1. Post localhost:8080/rest/deployment/create.
+2. Headers > Key = Content-Type , Value = multipart/form-data.
+3. Body > Key = upload of type file, Value = choose file to upload.
+4. Check in Cockpit/Processes if succesfull
+
+### start a process
+
+1. Post localhost:8080/rest/process-definition/key/yourProcessIDinModeller/start
+2. Headers > Key = Content-Type , Value = application/json.
+3. Body > Checkmark raw > empty json {}
+4. Check in Cockpit/Processes/yourProcess if started
+
+### start a process with variable
+
+1. Get localhost:8080/rest/task?processDefinitionKey=yourProcessIDinModeller (get the id in JSON repsonse)
+2. Post localhost:8080/rest/task/efcd51c6-15d1-11ea-8eb9-704d7b67f494/complete
+3. Headers > Key = Content-Type, Value = application/json
+4. Body > Checkmark raw, add following
+
+{"variables":
+    {"teamName": {"value": "koln"}
+    }
+}
+
+5. Check in Cockpit/Processes/yourProcess if started with variable
