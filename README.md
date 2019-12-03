@@ -66,6 +66,16 @@ Pg Admin
 
 	5. Check in Cockpit/Processes/yourProcess if started with variable
 	
+### send message to diagram
+	1. Post localhost:8080/rest/message
+	2. Headers > Key = Content-Type, Value = application/json
+	3. Body > Checkmark raw, add following
+	
+ 	{
+    	"messageName" : "FreeBeerArrived",
+    	"businessKey" :"50"
+   	}
+
 ## Trouble shooting
 	Port 8080 already in use error:
 	For Linux: netstat -lnp | grep 8080 (which instance listenning to 8080) >  kill -9 process_id
