@@ -27,6 +27,12 @@ Pg Admin
 	2. In srs/main/resources Adjust your application.yaml file with your db credentials like this.
 ![alt text](https://i.ibb.co/kGJXyj4/yaml.png)
 
+	3. We are using Java 11. If you get an Java compling error at beginning go to 
+		3.a Project > Properties > Java Build Path > Add your library.
+		3.b Adjust Pom.xml in Java version properties.
+	4. Right click on Pom.xml > Run as > Maven install
+	5. To run the Project Right click on Application.java > Run as > Java application
+
 ## Use REST to get information and post diagram or start diagram using Postman.
 [Camunda Rest Docs for further development or questions](https://docs.camunda.org/manual/7.10/reference/rest/)
 ### Post a diagram into Camunda
