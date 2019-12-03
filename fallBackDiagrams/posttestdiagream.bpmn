@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_04vvzi0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
+  <bpmn:process id="WatchKoln" name="Watch Koln" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_093a4ei</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_093a4ei" sourceRef="StartEvent_1" targetRef="Task_13fuzoy" />
+    <bpmn:exclusiveGateway id="ExclusiveGateway_1hjrkp8" name="what team picked" default="SequenceFlow_1orc6cf">
+      <bpmn:incoming>SequenceFlow_116jpr1</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0kxipzn</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_1orc6cf</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_116jpr1" sourceRef="Task_13fuzoy" targetRef="ExclusiveGateway_1hjrkp8" />
+    <bpmn:userTask id="Task_11eu50x" name="Watch game with friend">
+      <bpmn:incoming>SequenceFlow_0kxipzn</bpmn:incoming>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0kxipzn" sourceRef="ExclusiveGateway_1hjrkp8" targetRef="Task_11eu50x">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{teamName == "koln"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="EndEvent_1vuc0h8">
+      <bpmn:incoming>SequenceFlow_1orc6cf</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1orc6cf" sourceRef="ExclusiveGateway_1hjrkp8" targetRef="EndEvent_1vuc0h8" />
+    <bpmn:userTask id="Task_13fuzoy" name="Pick a Team">
+      <bpmn:incoming>SequenceFlow_093a4ei</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_116jpr1</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="WatchKoln">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="169" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_093a4ei_di" bpmnElement="SequenceFlow_093a4ei">
+        <di:waypoint x="215" y="187" />
+        <di:waypoint x="270" y="187" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_1hjrkp8_di" bpmnElement="ExclusiveGateway_1hjrkp8" isMarkerVisible="true">
+        <dc:Bounds x="425" y="162" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="408" y="222" width="85" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_116jpr1_di" bpmnElement="SequenceFlow_116jpr1">
+        <di:waypoint x="370" y="187" />
+        <di:waypoint x="425" y="187" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0q70h87_di" bpmnElement="Task_11eu50x">
+        <dc:Bounds x="560" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0kxipzn_di" bpmnElement="SequenceFlow_0kxipzn">
+        <di:waypoint x="450" y="162" />
+        <di:waypoint x="450" y="120" />
+        <di:waypoint x="560" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_1vuc0h8_di" bpmnElement="EndEvent_1vuc0h8">
+        <dc:Bounds x="692" y="182" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1orc6cf_di" bpmnElement="SequenceFlow_1orc6cf">
+        <di:waypoint x="475" y="187" />
+        <di:waypoint x="584" y="187" />
+        <di:waypoint x="584" y="200" />
+        <di:waypoint x="692" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1r9bds8_di" bpmnElement="Task_13fuzoy">
+        <dc:Bounds x="270" y="147" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
