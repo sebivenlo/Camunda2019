@@ -65,3 +65,8 @@ Pg Admin
 	}
 
 	5. Check in Cockpit/Processes/yourProcess if started with variable
+	
+## Trouble shooting
+	Port 8080 already in use error:
+	For Linux: netstat -lnp | grep 8080 (which instance listenning to 8080) >  kill -9 process_id
+	For Windows: netstat -ano | findstr 8080 (which instance listenning to 8080) > taskkill /F /pid process_id
