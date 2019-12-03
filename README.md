@@ -23,7 +23,7 @@ Pg Admin
 	https://www.pgadmin.org/download/
 
 ## Use REST to get information and post diagram or start diagram using Postman.
-
+[Camunda Rest Docs for further development or questions](https://docs.camunda.org/manual/7.10/reference/rest/)
 ### Post a diagram into Camunda
 
 1. Post localhost:8080/rest/deployment/create.
