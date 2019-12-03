@@ -1,0 +1,9 @@
+spring.datasource: # Please adjust username, password, hostname, port and database name
+  type: org.postgresql.jdbc2.optional.SimpleDataSource
+  username: postgres
+  password: admin
+  url: jdbc:postgresql://localhost:5432/camundadb
+
+camunda.bpm.admin-user:
+  id: demo
+  password: demo
