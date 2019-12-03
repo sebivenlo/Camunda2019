@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0kniara" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.5.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <bpmn:process id="checkweather" name="Weather Checkv1" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="start">
+      <bpmn:outgoing>SequenceFlow_1ug5h9w</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1ug5h9w" sourceRef="StartEvent_1" targetRef="Task_callWeatherCheckJavaClass" />
+    <bpmn:serviceTask id="Task_callWeatherCheckJavaClass" name="Check weather" camunda:class="com.example.workflow.CheckWeatherDelegate">
+      <bpmn:incoming>SequenceFlow_1ug5h9w</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0dwvon1</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_1ivdkz2" name="Is weather ok?">
+      <bpmn:incoming>SequenceFlow_0dwvon1</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1yez9fd</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0sjzpdn</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_0dwvon1" sourceRef="Task_callWeatherCheckJavaClass" targetRef="ExclusiveGateway_1ivdkz2" />
+    <bpmn:sequenceFlow id="SequenceFlow_1yez9fd" name="no" sourceRef="ExclusiveGateway_1ivdkz2" targetRef="Task_0rdc9pw">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{not weatherOk}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:serviceTask id="Task_0rdc9pw" name="Print complaint" camunda:class="com.example.workflow.LoggerDelegate">
+      <bpmn:incoming>SequenceFlow_1yez9fd</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_2</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0sjzpdn" name="yes" sourceRef="ExclusiveGateway_1ivdkz2" targetRef="ServiceTask_1">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{weatherOk}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="EndEvent_11062ca" name="end">
+      <bpmn:incoming>SequenceFlow_0esledy</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="ServiceTask_1" name="Print Happy" camunda:class="com.example.workflow.LoggerDelegate2">
+      <bpmn:incoming>SequenceFlow_0sjzpdn</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1" name="" sourceRef="ServiceTask_1" targetRef="Task_0n9uelq" />
+    <bpmn:sequenceFlow id="SequenceFlow_2" name="" sourceRef="Task_0rdc9pw" targetRef="Task_10df1dd" />
+    <bpmn:endEvent id="EndEvent_1uw0fkp">
+      <bpmn:incoming>SequenceFlow_0zob35k</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0zob35k" sourceRef="Task_10df1dd" targetRef="EndEvent_1uw0fkp" />
+    <bpmn:userTask id="Task_10df1dd" name="be angry" camunda:assignee="admin">
+      <bpmn:incoming>SequenceFlow_2</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0zob35k</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0esledy" sourceRef="Task_0n9uelq" targetRef="EndEvent_11062ca" />
+    <bpmn:userTask id="Task_0n9uelq" name="be happy" camunda:assignee="admin">
+      <bpmn:incoming>SequenceFlow_1</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0esledy</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="checkweather">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="309" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="186" y="352" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_11062ca_di" bpmnElement="EndEvent_11062ca">
+        <dc:Bounds x="912" y="309" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="921" y="352" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1ug5h9w_di" bpmnElement="SequenceFlow_1ug5h9w">
+        <di:waypoint x="215" y="327" />
+        <di:waypoint x="270" y="327" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_03m8m2i_di" bpmnElement="Task_callWeatherCheckJavaClass">
+        <dc:Bounds x="270" y="287" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_1ivdkz2_di" bpmnElement="ExclusiveGateway_1ivdkz2" isMarkerVisible="true">
+        <dc:Bounds x="425" y="302" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="414" y="359" width="72" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0dwvon1_di" bpmnElement="SequenceFlow_0dwvon1">
+        <di:waypoint x="370" y="327" />
+        <di:waypoint x="425" y="327" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1yez9fd_di" bpmnElement="SequenceFlow_1yez9fd">
+        <di:waypoint x="450" y="302" />
+        <di:waypoint x="450" y="120" />
+        <di:waypoint x="530" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="459" y="208" width="13" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0p16vo9_di" bpmnElement="Task_0rdc9pw">
+        <dc:Bounds x="530" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1uw0fkp_di" bpmnElement="EndEvent_1uw0fkp">
+        <dc:Bounds x="876" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="767" y="143" width="0" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0sjzpdn_di" bpmnElement="SequenceFlow_0sjzpdn" targetElement="_BPMNShape_ServiceTask_2">
+        <di:waypoint x="475" y="327" />
+        <di:waypoint x="591" y="327" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="491" y="327" width="27" height="22" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_2" bpmnElement="ServiceTask_1">
+        <dc:Bounds x="591" y="287" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="_BPMNShape_ServiceTask_2" targetElement="UserTask_09w9ln6_di">
+        <di:waypoint x="691" y="327" />
+        <di:waypoint x="740" y="327" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="ServiceTask_0p16vo9_di" targetElement="UserTask_0xxirgv_di">
+        <di:waypoint x="630" y="120" />
+        <di:waypoint x="720" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="738" y="120" width="6" height="6" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0zob35k_di" bpmnElement="SequenceFlow_0zob35k">
+        <di:waypoint x="820" y="120" />
+        <di:waypoint x="876" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0xxirgv_di" bpmnElement="Task_10df1dd">
+        <dc:Bounds x="720" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0esledy_di" bpmnElement="SequenceFlow_0esledy">
+        <di:waypoint x="840" y="328" />
+        <di:waypoint x="876" y="328" />
+        <di:waypoint x="876" y="327" />
+        <di:waypoint x="912" y="327" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_09w9ln6_di" bpmnElement="Task_0n9uelq">
+        <dc:Bounds x="740" y="287" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
