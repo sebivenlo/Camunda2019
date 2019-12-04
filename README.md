@@ -80,3 +80,15 @@ Pg Admin
 	Port 8080 already in use error:
 	For Linux: netstat -lnp | grep 8080 (which instance listenning to 8080) >  kill -9 process_id
 	For Windows: netstat -ano | findstr 8080 (which instance listenning to 8080) > taskkill /F /pid process_id
+	
+	
+	
+## Sources Used
+[Youtube Channel of Camunda](https://www.youtube.com/channel/UCTYG6fjGgHg5p47PqsiaI2w)
+Tutorials by: Niall Deehan & [Bernd Ruecker](https://github.com/berndruecker)
+
+[Camunda Docs](https://docs.camunda.org/manual/7.12/)
+
+[Big Business Process Diagram](https://theartfulmodellerdotcom.files.wordpress.com/2015/11/big-process-model.png?w=751&h=391)
+
+
